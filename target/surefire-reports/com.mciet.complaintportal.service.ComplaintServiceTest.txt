@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.mciet.complaintportal.service.ComplaintServiceTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.742 s -- in com.mciet.complaintportal.service.ComplaintServiceTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.152 s -- in com.mciet.complaintportal.service.ComplaintServiceTest

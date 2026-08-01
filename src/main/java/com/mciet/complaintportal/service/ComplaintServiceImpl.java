@@ -14,7 +14,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.mciet.complaintportal.dto.DashboardStatsDto;
+import com.mciet.complaintportal.dto.ComplaintStatusHistoryResponseDto;
+import com.mciet.complaintportal.entity.Role;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 @Service
@@ -119,6 +124,57 @@ public class ComplaintServiceImpl implements ComplaintService {
 
         return mapToDto(savedComplaint);
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ComplaintResponseDto> getAllComplaints() {
+        return complaintRepository.findAll().stream()
+                .map(this::mapToDto)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public DashboardStatsDto getDashboardStats() {
+        long totalComplaints = complaintRepository.count();
+
+        Map<String, Long> complaintsByStatus = new HashMap<>();
+        for (Status s : Status.values()) {
+            complaintsByStatus.put(s.name(), complaintRepository.countByStatus(s));
+        }
+
+        Map<String, Long> usersByRole = new HashMap<>();
+        for (Role r : Role.values()) {
+            usersByRole.put(r.name(), userRepository.countByRole(r));
+        }
+
+        return new DashboardStatsDto(totalComplaints, complaintsByStatus, usersByRole);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<ComplaintStatusHistoryResponseDto> getComplaintHistory(Integer complaintId) {
+        if (!complaintRepository.existsById(complaintId)) {
+            throw new ResourceNotFoundException("Complaint not found with ID: " + complaintId);
+        }
+
+        return historyRepository.findByComplaintIdOrderByChangedAtDesc(complaintId).stream()
+                .map(h -> {
+                    ComplaintStatusHistoryResponseDto dto = new ComplaintStatusHistoryResponseDto();
+                    dto.setId(h.getId());
+                    dto.setComplaintId(h.getComplaint().getId());
+                    dto.setStatus(h.getStatus());
+                    dto.setRemarks(h.getRemarks());
+                    if (h.getChangedBy() != null) {
+                        dto.setChangedByUserId(h.getChangedBy().getId());
+                        dto.setChangedByUserName(h.getChangedBy().getName());
+                    }
+                    dto.setChangedAt(h.getChangedAt());
+                    return dto;
+                })
+                .collect(Collectors.toList());
+    }
+
 
     private ComplaintResponseDto mapToDto(Complaint complaint) {
         ComplaintResponseDto dto = new ComplaintResponseDto();
