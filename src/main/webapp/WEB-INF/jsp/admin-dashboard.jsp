@@ -2,7 +2,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Smart Complaint Portal</title>
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
@@ -36,42 +39,47 @@
         </div>
 
         <h2>All Registered Complaints</h2>
-        <table id="allComplaintsTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Customer</th>
-                    <th>Details</th>
-                    <th>Category</th>
-                    <th>Status</th>
-                    <th>Assigned Agent</th>
-                    <th>Assign Agent</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="7" style="text-align: center;">Loading complaints...</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table id="allComplaintsTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Customer</th>
+                        <th>Details</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Assigned Agent</th>
+                        <th>Assign Agent</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="7" style="text-align: center;">Loading complaints...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
         <h2>Registered Users</h2>
-        <table id="allUsersTable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Created At</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="5" style="text-align: center;">Loading users...</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table id="allUsersTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td colspan="6" style="text-align: center;">Loading users...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <script>
@@ -185,17 +193,49 @@
 
                     users.forEach(u => {
                         const tr = document.createElement('tr');
+                        const isSelf = String(u.id) === String(userId);
+                        const deleteBtnHtml = isSelf 
+                            ? `<button class="btn" style="background-color: #cbd5e1; color: #64748b; cursor: not-allowed; padding: 4px 8px; font-size: 0.85rem;" disabled>Delete</button>`
+                            : `<button class="btn" style="background-color: #dc3545; padding: 4px 8px; font-size: 0.85rem;" onclick="deleteUser(\${u.id})">Delete</button>`;
+
                         tr.innerHTML = `
                             <td>\${u.id}</td>
                             <td>\${u.name}</td>
                             <td>\${u.email}</td>
                             <td><strong>\${u.role}</strong></td>
                             <td>\${u.createdAt ? new Date(u.createdAt).toLocaleString() : 'N/A'}</td>
+                            <td>\${deleteBtnHtml}</td>
                         `;
                         tbody.appendChild(tr);
                     });
                 })
                 .catch(err => console.error("Error loading users:", err));
+        }
+
+        // Delete User
+        function deleteUser(targetUserId) {
+            if (!confirm("Are you sure you want to delete this user?")) {
+                return;
+            }
+
+            fetch('/api/admin/users/' + targetUserId, {
+                method: 'DELETE'
+            })
+            .then(res => {
+                if (res.ok) {
+                    alert("User deleted successfully!");
+                    loadAllUsers();
+                    loadAllComplaints();
+                    loadStats();
+                } else {
+                    return res.json().then(data => {
+                        throw new Error(data.message || "Failed to delete user.");
+                    });
+                }
+            })
+            .catch(err => {
+                alert(err.message);
+            });
         }
 
         function getStatusColor(status) {

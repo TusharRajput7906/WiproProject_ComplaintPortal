@@ -51,9 +51,9 @@ CREATE INDEX idx_history_user ON complaint_status_history(changed_by);
 -- Insert Sample Data
 -- Note: passwords are dummy bcrypt hashes (password: "password123")
 INSERT INTO users (id, name, email, password, role) VALUES 
-(1, 'System Admin', 'admin@complaintportal.com', '$2a$10$tMh4bEVErC71s/9UoFfWb.X4tLlywN9B9L0/mZf7Jt234k7V.R1hS', 'ADMIN'),
-(2, 'Support Agent', 'agent@complaintportal.com', '$2a$10$tMh4bEVErC71s/9UoFfWb.X4tLlywN9B9L0/mZf7Jt234k7V.R1hS', 'AGENT'),
-(3, 'John Customer', 'customer@complaintportal.com', '$2a$10$tMh4bEVErC71s/9UoFfWb.X4tLlywN9B9L0/mZf7Jt234k7V.R1hS', 'CUSTOMER');
+(1, 'System Admin', 'admin@complaintportal.com', '$2a$10$wJav7AarwQIJ1bz6fMiaXevN5zMQWzp/4emn0vS64Ar.wQJoGMfY.', 'ADMIN'),
+(2, 'Support Agent', 'agent@complaintportal.com', '$2a$10$wJav7AarwQIJ1bz6fMiaXevN5zMQWzp/4emn0vS64Ar.wQJoGMfY.', 'AGENT'),
+(3, 'John Customer', 'customer@complaintportal.com', '$2a$10$wJav7AarwQIJ1bz6fMiaXevN5zMQWzp/4emn0vS64Ar.wQJoGMfY.', 'CUSTOMER');
 
 INSERT INTO complaints (id, title, description, category, status, customer_id, assigned_agent_id) VALUES
 (1, 'Billing Issue', 'Overcharged on my monthly subscription fee for July.', 'Billing', 'OPEN', 3, NULL);

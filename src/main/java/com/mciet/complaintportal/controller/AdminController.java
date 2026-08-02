@@ -56,4 +56,10 @@ public class AdminController {
         DashboardStatsDto stats = complaintService.getDashboardStats();
         return ResponseEntity.ok(stats);
     }
+
+    @DeleteMapping("/users/{userId}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Integer userId) {
+        userService.deleteUser(userId);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -11,4 +11,6 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Integer> {
     List<Complaint> findByCustomerId(Integer customerId);
     List<Complaint> findByAssignedAgentId(Integer agentId);
     long countByStatus(Status status);
+    boolean existsByCustomerIdAndStatusIn(Integer customerId, List<Status> statuses);
+    boolean existsByAssignedAgentIdAndStatusIn(Integer agentId, List<Status> statuses);
 }

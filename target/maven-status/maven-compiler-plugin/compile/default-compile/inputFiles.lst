@@ -27,6 +27,7 @@ C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\exception\Du
 C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\exception\GlobalExceptionHandler.java
 C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\exception\package-info.java
 C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\exception\ResourceNotFoundException.java
+C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\exception\UserDeletionException.java
 C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\repository\ComplaintRepository.java
 C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\repository\ComplaintStatusHistoryRepository.java
 C:\Users\Hp\ComplaintPortal\src\main\java\com\mciet\complaintportal\repository\package-info.java

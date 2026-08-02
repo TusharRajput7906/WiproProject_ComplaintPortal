@@ -12,4 +12,5 @@ public interface UserService {
     User findByEmail(String email);
     List<UserResponseDto> getAllUsers();
     List<UserResponseDto> getUsersByRole(Role role);
+    void deleteUser(Integer userId);
 }

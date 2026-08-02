@@ -1,28 +1,46 @@
+/* Global Reset & Base Styles */
+* {
+    box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f4f6f9;
     margin: 0;
     padding: 0;
     color: #333;
+    line-height: 1.5;
 }
 
+/* Header & Navigation */
 header {
     background-color: #0056b3;
     color: white;
-    padding: 10px 20px;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 header h1 {
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+header nav {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 header nav span {
-    margin-right: 15px;
     font-weight: bold;
+    font-size: 0.95rem;
 }
 
 header nav a, header nav button {
@@ -31,30 +49,45 @@ header nav a, header nav button {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
-    margin-left: 15px;
-    padding: 0;
+    font-size: 0.95rem;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.2s, text-decoration 0.2s;
 }
 
-header nav button:hover, header nav a:hover {
+header nav button {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+header nav button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+header nav a:hover {
     text-decoration: underline;
 }
 
+/* Layout Containers */
 .container {
+    width: 95%;
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 20px auto;
     padding: 20px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.08);
 }
 
 h2 {
     color: #0056b3;
-    border-bottom: 2px solid #eee;
+    border-bottom: 2px solid #e9ecef;
     padding-bottom: 10px;
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.3rem;
 }
 
+/* Form Styles */
 form {
     margin-bottom: 30px;
 }
@@ -67,14 +100,22 @@ form {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    font-size: 0.9rem;
+    color: #495057;
 }
 
 .form-group input, .form-group textarea, .form-group select {
     width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    border: 1px solid #ced4da;
     border-radius: 4px;
-    box-sizing: border-box;
+    font-size: 0.95rem;
+    transition: border-color 0.15s ease-in-out;
+}
+
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+    outline: none;
+    border-color: #80bdff;
 }
 
 button.btn {
@@ -84,35 +125,56 @@ button.btn {
     padding: 10px 20px;
     border-radius: 4px;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: background-color 0.2s;
 }
 
 button.btn:hover {
     background-color: #004085;
 }
 
+/* Tables & Responsive Wrapper */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 15px;
+    margin-bottom: 30px;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 15px;
-    margin-bottom: 30px;
+    margin: 0;
 }
 
 table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
+    padding: 12px;
     text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.9rem;
 }
 
 table th {
-    background-color: #f2f2f2;
+    background-color: #f8f9fa;
+    color: #495057;
+    font-weight: 600;
 }
 
+table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Alerts */
 .alert {
     padding: 12px;
     margin-bottom: 20px;
     border-radius: 4px;
     display: none;
+    font-size: 0.9rem;
 }
 
 .alert-danger {
@@ -129,23 +191,27 @@ table th {
 
 /* Auth Pages Style */
 .auth-container {
-    max-width: 400px;
-    margin: 80px auto;
-    padding: 30px;
+    width: 90%;
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 30px 25px;
     background-color: white;
     border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .auth-container h2 {
     text-align: center;
     border-bottom: none;
+    margin-bottom: 25px;
 }
 
 .auth-container .auth-link {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 20px;
     display: block;
+    font-size: 0.9rem;
+    color: #0056b3;
 }
 
 /* Dashboard Stats Cards */
@@ -158,16 +224,17 @@ table th {
 
 .stat-card {
     background-color: #e9ecef;
-    padding: 20px;
+    padding: 20px 15px;
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
 }
 
 .stat-card h3 {
     margin: 0;
-    font-size: 1.1rem;
+    font-size: 1rem;
     color: #495057;
+    font-weight: 500;
 }
 
 .stat-card p {
@@ -175,4 +242,84 @@ table th {
     font-size: 1.8rem;
     font-weight: bold;
     color: #0056b3;
+}
+
+/* Responsive Media Queries */
+
+/* Tablet Screens (1024px and below) */
+@media (max-width: 1024px) {
+    .container {
+        width: 96%;
+        margin: 15px auto;
+    }
+}
+
+/* Mobile Screens (600px and below) */
+@media (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 15px;
+    }
+
+    header nav {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    header nav span {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    header nav a, header nav button {
+        margin-left: 0;
+        width: 100%;
+        text-align: center;
+        padding: 8px 10px;
+    }
+
+    .container {
+        width: 94%;
+        padding: 15px;
+        margin: 10px auto;
+    }
+
+    .auth-container {
+        margin: 30px auto;
+        padding: 20px;
+    }
+
+    h2 {
+        font-size: 1.15rem;
+        margin-bottom: 15px;
+    }
+
+    .stats-container {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 12px;
+    }
+
+    .stat-card {
+        padding: 15px 10px;
+    }
+
+    .stat-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .stat-card p {
+        font-size: 1.5rem;
+    }
+
+    table th, table td {
+        padding: 10px 8px;
+    }
 }
