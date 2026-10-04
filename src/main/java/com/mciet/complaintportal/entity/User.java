@@ -24,7 +24,8 @@ public class User {
     @Column(nullable = false)
     private Role role;
 
-    @Column(name = "created_at", insertable = false, updatable = false)
+    @org.hibernate.annotations.CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
     // Getters and Setters
