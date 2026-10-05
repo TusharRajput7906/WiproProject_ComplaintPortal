@@ -1,2 +1,8 @@
+com\mciet\complaintportal\controller\AgentControllerTest.class
+com\mciet\complaintportal\controller\GlobalExceptionHandlerTest$TestController.class
 com\mciet\complaintportal\service\UserServiceTest.class
+com\mciet\complaintportal\controller\ComplaintControllerTest.class
+com\mciet\complaintportal\controller\GlobalExceptionHandlerTest.class
 com\mciet\complaintportal\service\ComplaintServiceTest.class
+com\mciet\complaintportal\controller\AdminControllerTest.class
+com\mciet\complaintportal\controller\AuthControllerTest.class

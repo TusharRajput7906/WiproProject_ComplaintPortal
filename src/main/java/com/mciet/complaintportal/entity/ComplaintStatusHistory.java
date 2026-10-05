@@ -26,7 +26,8 @@ public class ComplaintStatusHistory {
     @JoinColumn(name = "changed_by", nullable = false)
     private User changedBy;
 
-    @Column(name = "changed_at", insertable = false, updatable = false)
+    @org.hibernate.annotations.CreationTimestamp
+    @Column(name = "changed_at", updatable = false)
     private LocalDateTime changedAt;
 
     // Getters and Setters

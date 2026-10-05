@@ -2,6 +2,7 @@ package com.mciet.complaintportal.controller;
 
 import com.mciet.complaintportal.dto.ComplaintCreateDto;
 import com.mciet.complaintportal.dto.ComplaintResponseDto;
+import com.mciet.complaintportal.dto.ComplaintStatusHistoryResponseDto;
 import com.mciet.complaintportal.dto.StatusUpdateDto;
 import com.mciet.complaintportal.service.ComplaintService;
 import jakarta.validation.Valid;
@@ -33,6 +34,12 @@ public class ComplaintController {
     public ResponseEntity<ComplaintResponseDto> getComplaintById(@PathVariable Integer id) {
         ComplaintResponseDto responseDto = complaintService.getComplaintById(id);
         return ResponseEntity.ok(responseDto);
+    }
+
+    @GetMapping("/{id}/history")
+    public ResponseEntity<List<ComplaintStatusHistoryResponseDto>> getComplaintHistory(@PathVariable Integer id) {
+        List<ComplaintStatusHistoryResponseDto> history = complaintService.getComplaintHistory(id);
+        return ResponseEntity.ok(history);
     }
 
     @GetMapping("/customer/{customerId}")
